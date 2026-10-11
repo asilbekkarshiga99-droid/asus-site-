@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="lite.js"></script>
 
     <title>ASUS | Ноутбуктер, gaming компьютерлер және аксессуарлар</title>
     <meta name="description" content="ASUS ноутбуктер, gaming компьютерлер және аксессуарлар. Қазақстанға жеткізу, 2 жылдық кепілдік.">
@@ -30,7 +31,7 @@
     <link rel="manifest" href="manifest.webmanifest">
     <link rel="icon" href="icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="icon.svg">
-    <link rel="preload" href="laptop-Photoroom.png" as="image">
+    <link rel="preload" href="laptop-Photoroom.png" as="image" media="(min-width: 901px)">
     <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Store","@id":"https://example.com/#store","name":"ASUS Technology Store","url":"https://example.com/","image":"https://example.com/og-image.jpg","description":"ASUS ноутбуктер, gaming компьютерлер және аксессуарлар. Қазақстанға жеткізу, 2 жылдық кепілдік.","areaServed":"KZ","currenciesAccepted":"KZT","paymentAccepted":"Kaspi, Card, Cash","address":{"@type":"PostalAddress","addressLocality":"Алматы","addressCountry":"KZ"}},{"@type":"ItemList","name":"ASUS каталогы","itemListElement":[{"@type":"ListItem","position":1,"item":{"@type":"Product","name":"ROG Strix G16","description":"Қуатты gaming ноутбук. Ойындар мен ауыр бағдарламаларға арналған.","image":"https://example.com/hero-laptop.png","brand":{"@type":"Brand","name":"ASUS"},"category":"ROG SERIES","sku":"ROG-STRIX-G16","url":"https://example.com/#product=ROG%20Strix%20G16","offers":{"@type":"Offer","price":849990,"priceCurrency":"KZT","availability":"https://schema.org/InStock","itemCondition":"https://schema.org/NewCondition","seller":{"@id":"https://example.com/#store"}}}},{"@type":"ListItem","position":2,"item":{"@type":"Product","name":"Zenbook 14","description":"Жұқа әрі жеңіл ноутбук. Оқу және жұмысқа арналған.","image":"https://example.com/zenbook.png","brand":{"@type":"Brand","name":"ASUS"},"category":"ZENBOOK","sku":"ZENBOOK-14","url":"https://example.com/#product=Zenbook%2014","offers":{"@type":"Offer","price":699990,"priceCurrency":"KZT","availability":"https://schema.org/InStock","itemCondition":"https://schema.org/NewCondition","seller":{"@id":"https://example.com/#store"}}}},{"@type":"ListItem","position":3,"item":{"@type":"Product","name":"TUF Gaming A15","description":"Берік корпусы бар gaming ноутбук.","image":"https://example.com/tuf-Photoroom.png","brand":{"@type":"Brand","name":"ASUS"},"category":"TUF GAMING","sku":"TUF-GAMING-A15","url":"https://example.com/#product=TUF%20Gaming%20A15","offers":{"@type":"Offer","price":579990,"priceCurrency":"KZT","availability":"https://schema.org/InStock","itemCondition":"https://schema.org/NewCondition","seller":{"@id":"https://example.com/#store"}}}},{"@type":"ListItem","position":4,"item":{"@type":"Product","name":"Vivobook 15","description":"Күнделікті тапсырмаларға арналған әмбебап ноутбук.","image":"https://example.com/vivobook2-Photoroom.png","brand":{"@type":"Brand","name":"ASUS"},"category":"VIVOBOOK","sku":"VIVOBOOK-15","url":"https://example.com/#product=Vivobook%2015","offers":{"@type":"Offer","price":429990,"priceCurrency":"KZT","availability":"https://schema.org/OutOfStock","itemCondition":"https://schema.org/NewCondition","seller":{"@id":"https://example.com/#store"}}}},{"@type":"ListItem","position":5,"item":{"@type":"Product","name":"ROG Gaming PC","description":"Desktop компьютер. Максималды gaming performance.","image":"https://example.com/pc-Photoroom.png","brand":{"@type":"Brand","name":"ASUS"},"category":"GAMING PC","sku":"ROG-GAMING-PC","url":"https://example.com/#product=ROG%20Gaming%20PC","offers":{"@type":"Offer","price":999990,"priceCurrency":"KZT","availability":"https://schema.org/InStock","itemCondition":"https://schema.org/NewCondition","seller":{"@id":"https://example.com/#store"}}}},{"@type":"ListItem","position":6,"item":{"@type":"Product","name":"ASUS Gaming Monitor","description":"Gaming үшін жоғары жаңарту жиілігі бар монитор.","image":"https://example.com/monitor-Photoroom.png","brand":{"@type":"Brand","name":"ASUS"},"category":"MONITOR","sku":"ASUS-GAMING-MONITOR","url":"https://example.com/#product=ASUS%20Gaming%20Monitor","offers":{"@type":"Offer","price":249990,"priceCurrency":"KZT","availability":"https://schema.org/InStock","itemCondition":"https://schema.org/NewCondition","seller":{"@id":"https://example.com/#store"}}}},{"@type":"ListItem","position":7,"item":{"@type":"Product","name":"ASUS Gaming Keyboard","description":"RGB жарығы бар gaming клавиатура.","image":"https://example.com/keyboard.png","brand":{"@type":"Brand","name":"ASUS"},"category":"KEYBOARD","sku":"ASUS-GAMING-KEYBOARD","url":"https://example.com/#product=ASUS%20Gaming%20Keyboard","offers":{"@type":"Offer","price":49990,"priceCurrency":"KZT","availability":"https://schema.org/InStock","itemCondition":"https://schema.org/NewCondition","seller":{"@id":"https://example.com/#store"}}}}]}]}</script>
 
     <link rel="stylesheet" href="style.css">
@@ -113,9 +114,9 @@
             <div class="hero-product">
                 <div class="hero-circle"></div>
                 <div class="hero-image-box">
-                    <img src="laptop-Photoroom.png"
-                        alt="ASUS Laptop"
-                        onerror="this.style.display='none'">
+                    <picture><source media="(max-width: 900px)" srcset="img-m/laptop-Photoroom.webp" type="image/webp"><img src="laptop-Photoroom.png"
+                        alt="ASUS Laptop" fetchpriority="high"
+                        onerror="this.style.display='none'"></picture>
                     <div class="image-placeholder">
                         <div class="placeholder-laptop">
                             <div class="placeholder-screen">

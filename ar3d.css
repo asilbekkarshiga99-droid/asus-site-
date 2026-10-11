@@ -25,3 +25,4 @@
 .pp-view{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px}
 .pp-3dnote{width:100%;opacity:.55;font-size:12px}
 @media(max-width:600px){.ar-box{padding:20px 16px}.ar-qr{display:none}}
+@media(hover:none){.pp-img:hover img{transform:none}}

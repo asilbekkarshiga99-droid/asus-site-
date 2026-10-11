@@ -14,6 +14,8 @@ if (!Array.isArray(storeProducts) || !storeProducts.length) storeProducts = defa
 // Сақталған (localStorage) өнімдерде сурет жоқ болса, атауы бойынша автоматты қойылады
 const IMG_MAP = {"ROG Strix G16": "hero-laptop.png", "Zenbook 14": "zenbook.png", "TUF Gaming A15": "tuf-Photoroom.png", "Vivobook 15": "vivobook2-Photoroom.png", "ROG Gaming PC": "pc-Photoroom.png", "ASUS Gaming Monitor": "monitor-Photoroom.png", "ASUS Gaming Keyboard": "keyboard.png"};
 storeProducts.forEach(p => { if (!p.img && IMG_MAP[p.name]) p.img = IMG_MAP[p.name]; });
+// телефонда жеңіл суреттер (lite.js), компьютерде — түпнұсқа PNG
+if (window.LITE) storeProducts.forEach(p => { const m = /^([\w-]+)\.png$/.exec(p.img || ""); if (m && Object.values(IMG_MAP).includes(p.img)) p.img = "img-m/" + m[1] + ".webp"; });
 
 const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const colors = {gaming:"gaming", laptop:"silver", pc:"yellow", accessory:"blue"};

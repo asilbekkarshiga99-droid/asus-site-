@@ -12,7 +12,7 @@
 
   function viewer(n, opts) {
     const mv = document.createElement("model-viewer");
-    mv.setAttribute("src", SRC[n]); mv.setAttribute("alt", NAME[n] + " 3D моделі"); mv.setAttribute("camera-controls", ""); mv.setAttribute("auto-rotate", "");
+    mv.setAttribute("src", window.modelFile ? modelFile(n) : SRC[n]); mv.setAttribute("alt", NAME[n] + " 3D моделі"); mv.setAttribute("camera-controls", ""); mv.setAttribute("auto-rotate", "");
     mv.setAttribute("shadow-intensity", "1"); mv.setAttribute("exposure", "1.05"); mv.setAttribute("environment-image", "neutral"); mv.setAttribute("touch-action", "pan-y");
     mv.setAttribute("ar", ""); mv.setAttribute("ar-modes", "webxr scene-viewer quick-look"); mv.setAttribute("ar-scale", "fixed"); mv.setAttribute("ar-placement", "floor");
     if (n === "monitor") mv.setAttribute("camera-orbit", "180deg 80deg auto");

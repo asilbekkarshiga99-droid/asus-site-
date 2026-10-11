@@ -222,7 +222,7 @@
     const pivot = new T.Group(); pivot.add(gltfScene); pivot.userData.rot0 = ROT0[n]; if (rig) pivot.userData.rig = rig; return pivot;
   }
   function loadGLB(n, onProg) { return new Promise((res, rej) => { if (cache[n]) return res(cache[n]);
-    new T.GLTFLoader().setMeshoptDecoder(window.MeshoptDecoder).load(FILES[n], g => { cache[n] = prep(g.scene, n); res(cache[n]); }, e => e.total && onProg && onProg(e.loaded / e.total), rej); }); }
+    new T.GLTFLoader().setMeshoptDecoder(window.MeshoptDecoder).load(window.modelFile ? modelFile(n) : FILES[n], g => { cache[n] = prep(g.scene, n); res(cache[n]); }, e => e.total && onProg && onProg(e.loaded / e.total), rej); }); }
 
   const BUILD = { laptop, pc, monitor, keyboard }, DIST = { laptop: 13.5, pc: 13.5, monitor: 12.5, keyboard: 9.8 };
 
@@ -241,7 +241,7 @@
   function init(stage) {
     const W = () => stage.clientWidth, H = () => stage.clientHeight;
     const scene = new T.Scene(), cam = new T.PerspectiveCamera(40, W() / H(), .1, 100);
-    const ren = new T.WebGLRenderer({ antialias: true, alpha: true }); ren.setPixelRatio(Math.min(devicePixelRatio || 1, 2)); ren.setSize(W(), H());
+    const ren = new T.WebGLRenderer({ antialias: true, alpha: true }); ren.setPixelRatio(Math.min(devicePixelRatio || 1, window.LITE ? 1.5 : 2)); ren.setSize(W(), H());
     ren.outputEncoding = T.sRGBEncoding; ren.toneMapping = T.ACESFilmicToneMapping; ren.toneMappingExposure = 1.1;
     stage.appendChild(ren.domElement); const ov = stage.querySelector(".v3-load"); ov.style.zIndex = 2; ov.style.display = "none";
     // жарық ортасы (шағылысу үшін)
