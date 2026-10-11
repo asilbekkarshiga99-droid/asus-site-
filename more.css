@@ -1,0 +1,35 @@
+/* ===== more.js стильдері ===== */
+body{transition:background .4s,color .4s}
+.float-tools.closed button:not(.ft-toggle){display:none}
+.inst-box{display:flex;align-items:center;gap:10px;margin-top:14px;font-size:12px;color:#2a9d5c;font-weight:600;flex-wrap:wrap}
+.inst-box select{padding:8px;font-size:12px}
+#upsell{margin-top:14px}
+.notify-btn{margin-top:8px;width:100%}
+.mic{position:absolute;right:46px;top:50%;transform:translateY(-50%);border:0;background:none;cursor:pointer;font-size:16px}
+.search{position:relative}
+.pp{position:fixed;inset:0;z-index:1500;overflow-y:auto;background:#fff;color:#111;animation:fadeUp .4s}
+.dark .pp{background:#111;color:#fff}
+.pp[hidden]{display:none}
+.pp-in{max-width:1100px;margin:0 auto;padding:30px 5% 80px}
+.pp-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin:24px 0}
+.pp-img{height:420px;background:#f3f3f3;display:flex;align-items:center;justify-content:center;overflow:hidden;cursor:zoom-in;border-radius:10px}
+.dark .pp-img{background:#1b1c1f}
+.pp-img img{max-width:100%;max-height:100%;object-fit:contain;transition:transform .25s}
+.pp-img:hover img{transform:scale(2)}
+.pp h1{font-size:34px;margin:8px 0}
+.pp-price{font-size:30px;font-weight:800;margin:18px 0 4px}
+.pp-price s{font-size:16px;color:#888;font-weight:400}
+.pp h3{margin:34px 0 14px}
+.pp .rev{padding:14px 0;border-bottom:1px solid rgba(127,127,127,.25);font-size:13px}
+.pp .rev b{color:#f4a100}
+.pp form input,.pp form textarea,.pp form select{padding:12px;font:inherit;font-size:13px}
+@media(max-width:800px){.pp-grid{grid-template-columns:1fr}.pp-img{height:280px}}
+.chat-log{height:260px;overflow-y:auto;margin:14px 0;display:flex;flex-direction:column;gap:8px}
+.msg{padding:10px 14px;border-radius:14px;font-size:13px;max-width:85%;line-height:1.5}
+.msg.me{align-self:flex-end;background:#111;color:#fff}
+.msg.bot{align-self:flex-start;background:rgba(127,127,127,.15)}
+.tournament{margin:80px 6% 0;padding:60px 6%;background:linear-gradient(135deg,#111,#2a0a12);color:#fff;border-radius:14px}
+.tournament h2{font-size:42px;margin:8px 0}.tournament h2 b{color:#e63946}
+.tournament form{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.tournament input,.tournament select{padding:14px;border:0;font-size:13px;min-width:170px}
+#cupTimer{font-size:26px;font-weight:800;margin:14px 0;color:#ff9f1c}

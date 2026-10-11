@@ -1,0 +1,27 @@
+/* ===== AR терезесі және өнім бетіндегі 3D ===== */
+.ar-modal{position:fixed;inset:0;z-index:3000;background:rgba(5,5,8,.72);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:16px;animation:fadeUp .3s}
+.ar-modal[hidden]{display:none}
+.ar-box{position:relative;background:#fff;color:#111;border-radius:16px;width:min(760px,100%);max-height:calc(100vh - 32px);overflow:auto;padding:26px}
+.dark .ar-box{background:#16171a;color:#fff}
+.ar-box h3{margin:0 0 6px;font-size:24px}
+.ar-sub{margin:0 0 14px;opacity:.7;font-size:14px}
+.ar-x{position:absolute;right:14px;top:14px;width:36px;height:36px;border-radius:50%;border:0;background:rgba(0,0,0,.07);cursor:pointer;font-size:16px;color:inherit}
+.ar-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.ar-tabs button,.pp-view button{padding:8px 14px;border-radius:20px;border:1px solid rgba(0,0,0,.15);background:transparent;cursor:pointer;font-weight:600;font-size:13px;color:inherit}
+.dark .ar-tabs button,.dark .pp-view button{border-color:rgba(255,255,255,.2)}
+.ar-tabs button.on,.pp-view button.on{background:#e63946;border-color:#e63946;color:#fff}
+.ar-stage{height:min(420px,55vh);border-radius:12px;background:radial-gradient(circle at 50% 40%,#f4f4f6,#e3e4e8);position:relative;overflow:hidden}
+.dark .ar-stage{background:radial-gradient(circle at 50% 40%,#2a2b30,#121316)}
+.ar-stage model-viewer,.pp-img model-viewer{width:100%;height:100%;--poster-color:transparent}
+.ar-load{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:14px;opacity:.65}
+.ar-go{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);padding:12px 22px;border-radius:30px;border:0;background:#e63946;color:#fff;font-weight:700;cursor:pointer;box-shadow:0 6px 20px rgba(230,57,70,.4)}
+.ar-prog{position:absolute;left:0;right:0;top:0;height:3px;transition:opacity .4s}
+.ar-prog i{display:block;height:100%;width:0;background:#e63946;transition:width .2s}
+.ar-qr{display:flex;gap:16px;align-items:center;margin-top:14px;font-size:13px;line-height:1.5}
+.ar-qr[hidden]{display:none}
+.ar-qrimg{width:132px;height:132px;border-radius:8px;background:#fff;padding:6px;flex-shrink:0}
+.pp-img.is3d{cursor:grab;position:relative}
+.pp-img.is3d:hover img{transform:none}
+.pp-view{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px}
+.pp-3dnote{width:100%;opacity:.55;font-size:12px}
+@media(max-width:600px){.ar-box{padding:20px 16px}.ar-qr{display:none}}

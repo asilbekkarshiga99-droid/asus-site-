@@ -1,0 +1,33 @@
+/* ===== Жеке кабинет, тапсырыс, төлем, AI ===== */
+.acc-btn.in{box-shadow:inset 0 0 0 2px #e63946}
+.acc-tabs{display:flex;gap:6px;margin:6px 0 14px}
+.acc-tabs button{flex:1;padding:10px;border:1px solid #ddd;background:transparent;border-radius:8px;font-weight:700;cursor:pointer;color:inherit}
+.acc-tabs button.on{background:#111;color:#fff;border-color:#111}
+.dark .acc-tabs button.on{background:#fff;color:#111}
+.acc-form{display:flex!important}
+.acc-err{color:#e63946;font-size:13px;margin:0}
+.acc-note{font-size:13px;opacity:.7;line-height:1.5}
+.acc-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;font-size:13px;margin:4px 0 10px}
+.acc-head a{text-decoration:none}
+.acc-order{border:1px solid rgba(0,0,0,.1);border-radius:10px;padding:14px;margin:10px 0}
+.dark .acc-order{border-color:rgba(255,255,255,.12)}
+.acc-oh{display:flex;justify-content:space-between;align-items:center}
+.acc-st{font-size:11px;font-weight:700;padding:4px 10px;border-radius:12px;background:#eee;color:#333}
+.acc-st.st-Төлемкүтілуде{background:#fff3d6;color:#8a5a00}
+.acc-st.st-Төленді,.acc-st.st-Жеткізілді{background:#dcf5e6;color:#14663a}
+.acc-st.st-Жолда,.acc-st.st-Жиналуда,.acc-st.st-Қабылданды{background:#e1ebff;color:#1d3f99}
+.acc-st.st-Бастартылды{background:#fde2e4;color:#9b1c28}
+.acc-meta{font-size:12px;opacity:.6;margin:4px 0 8px}
+.acc-order ul{list-style:none;padding:0;margin:0 0 6px;font-size:13px}
+.acc-order li,.acc-row{display:flex;justify-content:space-between;gap:10px;padding:3px 0;font-size:13px}
+.acc-row.tot{font-weight:800;font-size:15px;border-top:1px dashed rgba(0,0,0,.15);margin-top:4px;padding-top:8px}
+.acc-pay{margin-top:12px;padding:12px;border-radius:8px;background:#fff6f6;border:1px solid #f6c9cd;font-size:13px}
+.dark .acc-pay{background:#2a1416;border-color:#5c2228}
+.acc-pay p{margin:6px 0}
+.acc-copy{display:flex;align-items:center;gap:8px;margin-top:6px}
+.acc-copy code{flex:1;background:rgba(0,0,0,.06);padding:6px 10px;border-radius:6px;font-size:13px}
+.acc-copy button{border:0;background:#e63946;color:#fff;border-radius:6px;padding:6px 10px;font-weight:700;cursor:pointer;font-size:12px}
+.typing{display:inline-flex;gap:4px}
+.typing i{width:6px;height:6px;border-radius:50%;background:currentColor;opacity:.4;animation:typ 1s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes typ{0%,100%{opacity:.25;transform:translateY(0)}50%{opacity:.9;transform:translateY(-3px)}}

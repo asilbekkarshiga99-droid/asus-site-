@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="kk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>ASUS әкімші панелі</title>
+<style>
+:root{--bg:#f5f5f7;--card:#fff;--ink:#111;--muted:#6b6f76;--line:#e6e7ea;--bar:#e63946;--grid:#eceef1}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0e0f11;--card:#17181b;--ink:#f2f2f3;--muted:#9a9ea6;--line:#2a2c30;--bar:#ff5a66;--grid:#24262a}}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+header{display:flex;justify-content:space-between;align-items:center;padding:18px 24px;background:var(--card);border-bottom:1px solid var(--line);gap:12px;flex-wrap:wrap}
+header h1{font-size:18px;margin:0}header a{color:var(--ink);font-size:13px}
+main{max-width:1200px;margin:0 auto;padding:22px 16px 60px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:16px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}
+.tile span{font-size:12px;color:var(--muted)}.tile b{display:block;font-size:26px;margin-top:6px;font-variant-numeric:tabular-nums}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}@media(max-width:860px){.grid2{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;margin-bottom:16px;overflow:hidden}
+.card h2{font-size:15px;margin:0 0 4px}.card p.sub{margin:0 0 14px;font-size:12px;color:var(--muted)}
+.chart{position:relative}.chart svg{width:100%;height:auto;display:block;overflow:visible}
+.tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--card);font-size:12px;padding:6px 9px;border-radius:6px;white-space:nowrap;transform:translate(-50%,-110%);opacity:0;transition:opacity .12s}
+.hbar{display:grid;grid-template-columns:minmax(120px,190px) 1fr 50px;align-items:center;gap:10px;font-size:13px;margin:7px 0}
+.hbar .t{height:14px;background:var(--grid);border-radius:4px;overflow:hidden}.hbar .t i{display:block;height:100%;background:var(--bar);border-radius:0 4px 4px 0}
+.hbar .v{text-align:right;font-variant-numeric:tabular-nums;color:var(--muted)}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:top}th{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+.scroll{overflow-x:auto}select{padding:6px;border-radius:6px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:12px}
+.empty{color:var(--muted);font-size:13px}
+.login{max-width:380px;margin:12vh auto;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:26px}
+.login input{width:100%;padding:11px;margin:6px 0;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)}
+.login button{width:100%;padding:12px;border:0;border-radius:8px;background:#e63946;color:#fff;font-weight:700;margin-top:8px;cursor:pointer}
+.err{color:#e63946;font-size:13px}
+</style></head><body>
+<header><h1>📊 ASUS — әкімші панелі</h1><div><a href="index.html">← Сайтқа оралу</a> · <a href="#" id="refresh">Жаңарту</a></div></header>
+<main id="app"><p class="empty">Жүктелуде...</p></main>
+<script>
+const $ = s => document.querySelector(s), app = $("#app");
+const E = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const money = n => Math.round(n).toLocaleString("ru") + " ₸";
+async function call(m, u, b) { const r = await fetch(u, { method: m, credentials: "same-origin", headers: b ? { "Content-Type": "application/json" } : {}, body: b ? JSON.stringify(b) : undefined }); const j = await r.json().catch(() => ({})); if (!r.ok) throw Object.assign(new Error(j.error || r.status), { status: r.status }); return j; }
+function login(msg) {
+  app.innerHTML = `<form class="login"><h2>Әкімші кіруі</h2><p class="empty">.env файлындағы ADMIN_EMAIL-мен тіркелген аккаунт.</p><input name="email" type="email" placeholder="Email" required><input name="password" type="password" placeholder="Құпиясөз" required><p class="err">${E(msg || "")}</p><button>Кіру</button></form>`;
+  app.querySelector("form").onsubmit = async e => { e.preventDefault(); const f = e.target; try { await call("POST", "/api/login", { email: f.email.value, password: f.password.value }); load(); } catch (x) { f.querySelector(".err").textContent = x.message; } };
+}
+// бағаналы диаграмма (бір қатар — легенда керек емес)
+function bars(days, key, label) {
+  const W = 560, H = 180, P = { l: 30, r: 6, t: 10, b: 26 }, max = Math.max(1, ...days.map(d => d[key])), step = niceStep(max), top = Math.ceil(max / step) * step;
+  const bw = (W - P.l - P.r) / days.length, y = v => P.t + (H - P.t - P.b) * (1 - v / top);
+  let g = ""; for (let v = 0; v <= top; v += step) g += `<line x1="${P.l}" x2="${W - P.r}" y1="${y(v)}" y2="${y(v)}" stroke="var(--grid)"/><text x="${P.l - 6}" y="${y(v) + 4}" font-size="10" fill="var(--muted)" text-anchor="end">${v}</text>`;
+  const b = days.map((d, i) => { const x = P.l + i * bw + 2, w = Math.max(2, bw - 4), h = y(0) - y(d[key]), r = Math.min(4, w / 2, h);
+    const path = h > 0 ? `M${x},${y(0)}V${y(d[key]) + r}Q${x},${y(d[key])} ${x + r},${y(d[key])}H${x + w - r}Q${x + w},${y(d[key])} ${x + w},${y(d[key]) + r}V${y(0)}Z` : "";
+    return `<g class="hit" data-tip="${E(d.d.slice(5))}: ${d[key]} ${label}"><rect x="${P.l + i * bw}" y="${P.t}" width="${bw}" height="${H - P.t - P.b}" fill="transparent"/>${path ? `<path d="${path}" fill="var(--bar)"/>` : ""}${i % 2 === days.length % 2 ? "" : `<text x="${x + w / 2}" y="${H - 8}" font-size="10" fill="var(--muted)" text-anchor="middle">${d.d.slice(8)}</text>`}</g>`; }).join("");
+  return `<div class="chart"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${E(label)} күн бойынша">${g}${b}</svg><div class="tip"></div></div>`;
+}
+function niceStep(m) { const raw = m / 4, p = Math.pow(10, Math.floor(Math.log10(raw || 1))), n = raw / p; return Math.max(1, (n <= 1 ? 1 : n <= 2 ? 2 : n <= 5 ? 5 : 10) * p); }
+const hbars = (rows, unit) => { if (!rows.length) return '<p class="empty">Әзірге дерек жоқ.</p>'; const m = rows[0][1] || 1; return rows.map(([k, v]) => `<div class="hbar"><span>${E(k)}</span><div class="t"><i style="width:${v / m * 100}%"></i></div><span class="v">${v}${unit || ""}</span></div>`).join(""); };
+async function load() {
+  let s; try { s = await call("GET", "/api/admin/stats"); } catch (x) { return login(x.status === 403 ? "Бұл аккаунт әкімші емес (ADMIN_EMAIL-ді тексер)." : x.status === 401 ? "" : "Сервер қатесі: " + x.message); }
+  const T = s.totals;
+  app.innerHTML = `<div class="tiles">
+    <div class="tile"><span>Барлық кіру</span><b>${T.visits}</b></div><div class="tile"><span>Тапсырыс</span><b>${T.orders}</b></div>
+    <div class="tile"><span>Төленген түсім</span><b>${money(T.revenue)}</b></div><div class="tile"><span>Барлық тапсырыс сомасы</span><b>${money(T.pending)}</b></div>
+    <div class="tile"><span>Тіркелгендер</span><b>${T.users}</b></div><div class="tile"><span>Жазылушылар</span><b>${T.subscribers}</b></div></div>
+    <div class="grid2"><div class="card"><h2>Кірулер</h2><p class="sub">Соңғы 14 күн, бет ашылу саны</p>${bars(s.days, "visits", "кіру")}</div>
+    <div class="card"><h2>Тапсырыстар</h2><p class="sub">Соңғы 14 күн</p>${bars(s.days, "orders", "тапсырыс")}</div></div>
+    <div class="grid2"><div class="card"><h2>Ең көп қаралған өнімдер</h2><p class="sub">Өнім беті ашылған саны</p>${hbars(s.views)}</div>
+    <div class="card"><h2>Ең көп сатылғандар</h2><p class="sub">Дана (бас тартылғандардан басқа)</p>${hbars(s.sold, " дана")}</div></div>
+    <div class="card"><h2>Тапсырыстар</h2><p class="sub">Статусты өзгертсең, клиент кабинетінде бірден көрінеді. Kaspi аударымы келгенде «Төленді» деп қой.</p><div class="scroll"><table><thead><tr><th>Нөмір</th><th>Күні</th><th>Клиент</th><th>Тауарлар</th><th>Сома</th><th>Төлем</th><th>Статус</th></tr></thead><tbody>
+    ${s.orders.map(o => `<tr><td><b>${E(o.id)}</b></td><td>${new Date(o.date).toLocaleString("ru")}</td><td>${E(o.customer.name)}<br><small>${E(o.customer.phone)}<br>${E(o.customer.city)}, ${E(o.customer.address)}</small></td>
+      <td>${o.items.map(i => E(i.name) + " × " + i.quantity).join("<br>")}</td><td>${money(o.total)}${o.promo ? "<br><small>" + E(o.promo) + "</small>" : ""}</td><td>${E(o.pay)}</td>
+      <td><select data-id="${E(o.id)}">${s.statuses.map(st => `<option ${st === o.status ? "selected" : ""}>${E(st)}</option>`).join("")}</select></td></tr>`).join("") || '<tr><td colspan="7" class="empty">Әзірге тапсырыс жоқ</td></tr>'}
+    </tbody></table></div></div>
+    <div class="grid2"><div class="card"><h2>Хабарламалар</h2>${s.messages.map(m => `<p><b>${E(m.name)}</b> <small>${E(m.email)} · ${new Date(m.d).toLocaleString("ru")}</small><br>${E(m.text)}</p>`).join("") || '<p class="empty">Жоқ</p>'}</div>
+    <div class="card"><h2>«Қайта түскенде хабарла»</h2>${s.notify.map(n => `<p>${E(n.product)} — <b>${E(n.contact)}</b></p>`).join("") || '<p class="empty">Жоқ</p>'}<h2 style="margin-top:18px">Жазылушылар</h2>${s.subscribers.map(n => `<p>${E(n.email)}</p>`).join("") || '<p class="empty">Жоқ</p>'}</div></div>`;
+  app.querySelectorAll("select[data-id]").forEach(sel => sel.onchange = async () => { try { await call("POST", "/api/admin/order", { id: sel.dataset.id, status: sel.value }); sel.style.outline = "2px solid #2a9d5c"; setTimeout(() => sel.style.outline = "", 900); } catch (x) { alert(x.message); } });
+  app.querySelectorAll(".chart").forEach(c => { const tip = c.querySelector(".tip");
+    c.addEventListener("mousemove", e => { const g = e.target.closest(".hit"); if (!g) return tip.style.opacity = 0; const r = c.getBoundingClientRect(); tip.textContent = g.dataset.tip; tip.style.left = e.clientX - r.left + "px"; tip.style.top = e.clientY - r.top + "px"; tip.style.opacity = 1; });
+    c.addEventListener("mouseleave", () => tip.style.opacity = 0); });
+}
+$("#refresh").onclick = e => { e.preventDefault(); load(); };
+load();
+</script></body></html>

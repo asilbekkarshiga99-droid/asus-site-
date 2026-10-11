@@ -1,0 +1,53 @@
+/* ===== Қосымша анимациялар (2-пакет) ===== */
+@keyframes popIn{from{opacity:0;transform:translateY(24px) scale(.94)}to{opacity:1;transform:none}}
+@keyframes spinBorder{to{--a:360deg}}
+@keyframes shineSweep{from{transform:translateX(-120%) skewX(-20deg)}to{transform:translateX(260%) skewX(-20deg)}}
+@keyframes drawLine{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@property --a{syntax:"<angle>";inherits:false;initial-value:0deg}
+
+/* Hero бөлшектері (canvas) */
+.hero{position:relative}
+#heroParticles{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.hero>*:not(#heroParticles){position:relative;z-index:1}
+
+/* Модальды терезелер секіріп ашылады */
+.cart-modal.show .cart-window{animation:popIn .4s cubic-bezier(.2,.8,.2,1)}
+
+/* Өнім картасы: айналатын градиент жиек + сурет жарқылы */
+.product{position:relative}
+.product:before{content:"";position:absolute;inset:-2px;border-radius:inherit;padding:2px;z-index:2;pointer-events:none;opacity:0;transition:opacity .3s;
+ background:conic-gradient(from var(--a),#e63946,#ff9f1c,#3a86ff,#e63946);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:spinBorder 3s linear infinite}
+.product:hover:before{opacity:1}
+.product-image{position:relative;overflow:hidden}
+.product-image:after{content:"";position:absolute;top:0;left:0;width:40%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);transform:translateX(-120%) skewX(-20deg);pointer-events:none}
+.product:hover .product-image:after{animation:shineSweep .9s ease}
+.product-image img{opacity:0;transition:opacity .6s ease,transform .4s}
+.product-image img.loaded{opacity:1}
+
+/* Мәзір сызығы және активті сілтеме */
+.navigation a{position:relative}
+.navigation a:after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;background:#e63946;transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.navigation a:hover:after,.navigation a.active:after{transform:scaleX(1)}
+.navigation a.active{color:#111;font-weight:700}
+.dark .navigation a.active{color:#fff}
+
+/* Header төменге айналғанда жасырылады */
+.header{transition:transform .35s ease,box-shadow .3s}
+.header.hide{transform:translateY(-100%)}
+
+/* Тақырып астындағы сызық салынады */
+.section-heading h2{position:relative;display:inline-block}
+.section-heading h2:after{content:"";display:block;height:4px;width:60%;margin-top:8px;background:#e63946;transform:scaleX(0);transform-origin:left}
+.section-heading.in h2:after{animation:drawLine .8s .3s forwards}
+
+/* Батырма көрсеткісі қозғалады, магнитті эффект */
+.main-button,.outline-button{transition:transform .2s ease,background .3s,color .3s}
+.main-button:hover{box-shadow:0 10px 26px rgba(0,0,0,.25)}
+.stat strong{display:inline-block;transition:transform .3s}
+.stat:hover strong{transform:scale(1.12)}
+@media(prefers-reduced-motion:reduce){#heroParticles{display:none}.product:before,.product-image:after{display:none}}
+
+/* Түзетулер: салыстыру түймесі жеңілдік белгісін жаппасын; сол жақтағы хабарлама жолағы көрінбесін */
+.cmp{top:46px!important}
+.sale-toast{visibility:hidden;transition:transform .5s,visibility .5s}
+.sale-toast.show{visibility:visible}

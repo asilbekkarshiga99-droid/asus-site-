@@ -1,0 +1,25 @@
+/* ===== Анимациялар ===== */
+@keyframes fadeUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:none}}
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+@keyframes pulseRing{0%{box-shadow:0 0 0 0 rgba(230,57,70,.5)}100%{box-shadow:0 0 0 14px rgba(230,57,70,0)}}
+@keyframes marquee{to{transform:translateX(-50%)}}
+@keyframes bump{40%{transform:scale(1.5)}}
+@keyframes blink{50%{opacity:0}}
+@keyframes rip{to{transform:scale(4);opacity:0}}
+.hero-text>*{opacity:0;animation:fadeUp .9s cubic-bezier(.2,.7,.2,1) forwards}
+.hero-text>*:nth-child(2){animation-delay:.15s}.hero-text>*:nth-child(3){animation-delay:.3s}.hero-text>*:nth-child(4){animation-delay:.45s}
+.hero-image-box img{animation:floatY 5s ease-in-out infinite}
+.floating-info{animation:floatY 4s ease-in-out infinite .8s}
+.hero-label.typing:after{content:"|";margin-left:2px;animation:blink .8s infinite}
+.js-reveal{opacity:0;transform:translateY(50px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
+.js-reveal.from-left{transform:translateX(-60px)}.js-reveal.from-right{transform:translateX(60px)}
+.js-reveal.in{opacity:1;transform:none}
+.product-badge{animation:pulseRing 2s infinite}
+.main-button,.outline-button{position:relative;overflow:hidden}
+.ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.5);transform:scale(0);animation:rip .6s ease-out;pointer-events:none}
+#cartCount.bump{animation:bump .5s}
+.fly{position:fixed;z-index:3000;pointer-events:none;object-fit:contain;transition:all .8s cubic-bezier(.5,-.2,.8,.4)}
+.brand-strip{overflow:hidden;white-space:nowrap;padding:18px 0;background:#111;color:#fff;margin:40px 0 0}
+.brand-strip div{display:inline-block;animation:marquee 28s linear infinite;font-weight:800;letter-spacing:4px;font-size:14px}
+.brand-strip span{margin:0 28px;opacity:.85}.brand-strip span:nth-child(3n){color:#e63946}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}.js-reveal,.hero-text>*{opacity:1!important;transform:none!important}}

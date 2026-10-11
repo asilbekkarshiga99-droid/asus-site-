@@ -1,0 +1,35 @@
+/* ---- Жаңа функциялар ---- */
+.progress-bar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,#e63946,#ff9f1c);z-index:9999}
+.rating{display:flex;align-items:center;gap:6px;font-size:11px;color:#f4a100;margin:4px 0 8px}
+.rating small{color:#888}
+.stock-left{font-size:11px;font-weight:700;color:#e63946;margin-bottom:8px}
+.stock-left.ok{color:#2a9d5c}
+.float-tools{position:fixed;left:20px;bottom:20px;z-index:900;display:flex;flex-direction:column;gap:10px}
+.float-tools button{padding:12px 18px;border:0;border-radius:30px;background:#111;color:#fff;font-size:12px;font-weight:700;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.25);transition:.3s}
+.float-tools button:hover{transform:translateY(-3px);background:#e63946}
+.opt-grid{display:grid;gap:10px;margin:18px 0}
+.opt-grid button{padding:14px;border:1px solid #ddd;background:transparent;color:inherit;text-align:left;font-size:13px;cursor:pointer;border-radius:6px;transition:.25s}
+.opt-grid button:hover{background:#111;color:#fff}
+.quiz-step{font-size:11px;color:#888;letter-spacing:2px}
+.quiz-result h3{font-size:22px;margin:8px 0}
+.quiz-result .price{font-size:20px;font-weight:800;margin:10px 0}
+.sale-toast{position:fixed;left:20px;bottom:90px;max-width:300px;padding:14px 18px;background:#fff;color:#111;border-left:4px solid #2a9d5c;border-radius:6px;box-shadow:0 10px 30px rgba(0,0,0,.2);font-size:12px;line-height:1.5;z-index:950;transform:translateX(-130%);transition:transform .5s}
+.sale-toast.show{transform:none}
+.sale-toast small{display:block;color:#888}
+@media(max-width:700px){.float-tools{bottom:80px}.sale-toast{bottom:150px;max-width:240px}}
+
+.rgb-on .progress-bar{height:5px;animation:hue 3s linear infinite}
+@keyframes hue{to{filter:hue-rotate(360deg)}}
+.qv-img{display:block;max-width:100%;max-height:220px;margin:0 auto 14px;object-fit:contain}
+.cfg-row{display:flex;flex-direction:column;gap:4px;margin:12px 0;font-size:11px;color:#888}
+.cfg-row select{padding:12px;font-size:13px}
+.cfg-total{font-size:24px;font-weight:800;margin:16px 0 4px}
+.fps{display:flex;gap:8px;margin:10px 0}
+.fps div{flex:1;padding:10px 4px;text-align:center;background:rgba(127,127,127,.12);border-radius:6px;font-size:10px}
+.fps b{display:block;font-size:18px;color:#2a9d5c}
+.wa-check{display:flex;gap:8px;align-items:center;font-size:12px}
+
+/* Салыстыру батырмасы: жоғарғы сол жақта, көрінетін әрі басуға ыңғайлы */
+.cmp{top:10px!important;bottom:auto!important;left:12px!important;width:auto!important;padding:0 12px;height:34px!important;border-radius:30px!important;font-size:11px!important;font-weight:700;box-shadow:0 4px 12px rgba(0,0,0,.12)}
+.cmp:after{content:" Салыстыру"}
+.compare-bar{z-index:1200!important}
